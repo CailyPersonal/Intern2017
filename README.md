@@ -9,3 +9,6 @@ Power by tencent cloud (QCloud).
 
 
 # CailyPersonal 2017/6/23
+
+# Build and run environment
+Intellij IDEA 2017.1, JDK 1.8
