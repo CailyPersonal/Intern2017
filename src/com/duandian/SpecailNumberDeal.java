@@ -9,7 +9,13 @@ import java.util.Arrays;
  *
  */
 
-
+/**
+ * @class SpecailNumberDeal.
+ * @author Caily.
+ * @brief A class to make and output result of the game.
+ * @attetion Number zero is too special to deal with it, but in this version I have supported it. However, zero is <b>not
+ * a multiple for any number</b> (in this version, number range is 1~100 which is the id of students).
+ */
 public class SpecailNumberDeal {
 
     private static SpecailNumberDeal classInstance;
@@ -61,7 +67,7 @@ public class SpecailNumberDeal {
      */
     private boolean outputResult(int[] nums) {
 
-        int toOutputWordIndex = NOT_VALID_WORD_INDEX;
+        int toOutputWordIndex;
 
         for (int i = 1; i <= studentCount; i++) {
 
@@ -86,21 +92,22 @@ public class SpecailNumberDeal {
      * @param nums Special numbers.
      * @return Return true if success, else false.
      * <p>
-     * Attention: Factory mode.
+     * Attention:
+     *  1. Factory mode.
+     *  2. In case of multi threads.
+     *  <p>
      * @checked false.
      */
-    public synchronized static boolean makeAndOutputResult(int[] nums) {
+    public synchronized static boolean makeAndOutputResult(int[] nums){
 
-        // In case of multi threads.
+        // Input check before deal with it.
+        if (!inputCheck(nums)) return false;
 
-            // Input check before deal with it.
-            if (!inputCheck(nums)) return false;
+        // Create class instance before do it.
+        if (null == classInstance) classInstance = new SpecailNumberDeal();
 
-            // Create class instance before do it.
-            if (null == classInstance) classInstance = new SpecailNumberDeal();
-
-            // Make and do it.
-            return classInstance.outputResult(nums);
+        // Make and do it.
+        return classInstance.outputResult(nums);
     }
 
     /**
@@ -129,7 +136,6 @@ public class SpecailNumberDeal {
         return result;
     }
 
-
     /**
      * @param specialNum
      * @param targetNum
@@ -148,7 +154,9 @@ public class SpecailNumberDeal {
     private boolean hasFirstSpecialNumber(int specialNum, int targetNum) {
 
         // Check each pos of the targetNumber(from right to left).
-        if (specialNum == targetNum % 10 || specialNum == targetNum / 10 || specialNum == targetNum / 100) return true;
+        if (specialNum == targetNum % 10 ||
+           (specialNum > 9 && specialNum == targetNum / 10) ||
+           (specialNum > 99 && specialNum == targetNum / 100)) return true;
 
         return false;
     }
@@ -171,7 +179,7 @@ public class SpecailNumberDeal {
         if (null == nums || nums.length != 3) return false;
 
         // Make sure each number is a single digit
-        if (nums[0] > 9 || nums[0] < 1) return false;
+        if (nums[0] > 9 || nums[0] < 0) return false;
 
         // Check multiple. (ATTENTION: it is dangerous to alter or change elements' pos!)
         if (nums[0] == nums[1] || nums[0] == nums[2] || nums[1] == nums[2]) return false;
