@@ -11,10 +11,9 @@ public class Main {
      */
     public static void main(String[] main) {
 
-
         // Entry for execute the method. So, you just need to change the special numbers here!
-        if (false == SpecailNumberDeal.makeAndOutputResult(new int[]{0, 5, 7})){
-            System.out.println("It means you have given an invalid array, check if multi, wrong lenght of array or out of range!");
-        }
+        if (false == SpecailNumberDeal.makeAndOutputResult(new int[]{2, 5, 7})){
+            System.out.println("It means you have given an invalid array, check if multi, wrong length of array or out of range!");
+        }else System.out.println("done!");
     }
 }
