@@ -1,6 +1,8 @@
 package com.duandian;
 
 import java.util.Arrays;
+import java.util.logging.Logger;
+
 
 /**
  * Created by Caily on 6/23/2017.
@@ -10,18 +12,14 @@ import java.util.Arrays;
  */
 
 /**
- * @class SpecailNumberDeal.
  * @author Caily.
- * @brief A class to make and output result of the game.
- * @attetion Number zero is too special to deal with it, but in this version I have supported it. However, zero is <b>not
+ * Aattetion: Number zero is too special to deal with it, but in this version I have supported it. However, zero is <b>not
  * a multiple for any number</b> (in this version, number range is 1~100 which is the id of students).
  */
 public class SpecailNumberDeal {
 
     private static SpecailNumberDeal classInstance;
-
     private static boolean containZero;
-
     private final String[] specailWords;
     private final int studentCount;
 
@@ -32,9 +30,6 @@ public class SpecailNumberDeal {
                       THRID_POS     = 0x04;
 
     /**
-     * @brief Constructor method for class.
-     * @detial
-     * <p>
      *  According to the rules, there are 7 kinds of output. Here I use a bit operator to simply combine situations.
      *  So the judge method {@link #getNumberOutputIndex(int[], int)} can simple return the index of the result.
      *  ATTENTION: The first place is used to make a judgement if situation is confirmed.
@@ -56,14 +51,11 @@ public class SpecailNumberDeal {
     }
 
     /**
-     * @brief Core method to make the output.
      * @param nums Special numbers.
      * @return Return true if success, else false.
      * <p>
      * Attention:
      * 1. nums are checked in {@link #makeAndOutputResult(int[])}, so no need to check them again.
-     * <p>
-     * @checked false.
      */
     private boolean outputResult(int[] nums) {
 
@@ -88,15 +80,12 @@ public class SpecailNumberDeal {
     }
 
     /**
-     * @brief Entry and method to make and output the result.
      * @param nums Special numbers.
      * @return Return true if success, else false.
      * <p>
      * Attention:
      *  1. Factory mode.
      *  2. In case of multi threads.
-     *  <p>
-     * @checked false.
      */
     public synchronized static boolean makeAndOutputResult(int[] nums){
 
@@ -111,14 +100,12 @@ public class SpecailNumberDeal {
     }
 
     /**
-     * @brief Get the index of specailWords.
      * @param nums Special words.
      * @param targetNum Target number.
      * @return Index of array specailWords.
      * <p>
-     * @detial In order to in case of zero, function is seperated to two kinds mainly.
+     * In order to in case of zero, function is seperated to two kinds mainly.
      * <p>
-     * @checked false.
      */
     private int getNumberOutputIndex(final int[] nums, int targetNum) {
         int result = NOT_VALID_WORD_INDEX;
@@ -137,19 +124,16 @@ public class SpecailNumberDeal {
     }
 
     /**
-     * @param specialNum
-     * @param targetNum
+     * @param specialNum Special numbers.
+     * @param targetNum Target number;
      * @return Return true if it contains, else false.
-     * @brief Check if targetNum contains specailNum.
-     * @Attention
+     * Attention
      * <p>
      * Zero is a very special number. It is simple to not to support this number, else we need to consider it carefully.
      * We confiram here that zero is not a multiple for any number(except zero itself).
      * <p>
      * It is necessary to make sure u have call {@link #inputCheck(int[])} before you can invoke this, or it will be
      * crashed!
-     * <p>
-     * @checked false.
      */
     private boolean hasFirstSpecialNumber(int specialNum, int targetNum) {
 
@@ -164,14 +148,12 @@ public class SpecailNumberDeal {
     /**
      * @param nums An array which hold numbers.
      * @return Return true if OK, else false.
-     * @brief Check if the input is valid
-     * @Attention It is necessary to check:
+     * Attention It is necessary to check:
      * 1. null
      * 2. count
      * 3. single number's range
      * 4. multi
      * 5. It is not allowed to alter element or change pos!
-     * @checked true
      */
     private static boolean inputCheck(final int[] nums) {
 

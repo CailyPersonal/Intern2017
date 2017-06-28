@@ -6,8 +6,7 @@ import com.duandian.SpecailNumberDeal;
 public class Main {
 
     /**
-     * @brief Common entry for a Java application.
-     * @param main
+     * @param main Input arguments
      */
     public static void main(String[] main) {
 
